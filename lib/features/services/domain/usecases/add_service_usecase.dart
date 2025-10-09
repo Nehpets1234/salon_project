@@ -1,3 +1,5 @@
+import 'package:dartz/dartz.dart';
+import '../../../../core/errors/failure.dart';
 import '../entities/service_entity.dart';
 import '../repositories/service_repository.dart';
 
@@ -6,7 +8,7 @@ class AddServiceUseCase {
 
   AddServiceUseCase(this.repository);
 
-  Future<void> call(ServiceEntity service) {
-    return repository.addService(service);
+  Future<Either<Failure, void>> call(ServiceEntity service) async {
+    return await repository.addService(service);
   }
 }

@@ -1,3 +1,5 @@
+import 'package:dartz/dartz.dart';
+import '../../../../core/errors/failure.dart';
 import '../repositories/service_repository.dart';
 
 class DeleteServiceUseCase {
@@ -5,7 +7,7 @@ class DeleteServiceUseCase {
 
   DeleteServiceUseCase(this.repository);
 
-  Future<void> call(String serviceId) {
-    return repository.deleteService(serviceId);
+  Future<Either<Failure, Unit>> call(String serviceId) async {
+    return await repository.deleteService(serviceId);
   }
 }

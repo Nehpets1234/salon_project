@@ -1,3 +1,5 @@
+import 'package:dartz/dartz.dart';
+import '../../../../core/errors/failure.dart';
 import '../entities/service_entity.dart';
 import '../repositories/service_repository.dart';
 
@@ -6,7 +8,7 @@ class GetServiceDetailUseCase {
 
   GetServiceDetailUseCase(this.repository);
 
-  Future<ServiceEntity?> call(String serviceId) {
-    return repository.getServiceDetail(serviceId);
+  Future<Either<Failure, ServiceEntity>> call(String serviceId) async {
+    return await repository.getServiceDetail(serviceId);
   }
 }
