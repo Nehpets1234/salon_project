@@ -1,3 +1,5 @@
+import 'package:dartz/dartz.dart';
+import '../../../../core/errors/failure.dart';
 import '../repositories/appointment_repository.dart';
 
 class NotifyCustomerUseCase {
@@ -5,7 +7,7 @@ class NotifyCustomerUseCase {
 
   NotifyCustomerUseCase(this.repository);
 
-  Future<void> call(String appointmentId, String message) {
-    return repository.notifyCustomer(appointmentId, message);
+  Future<Either<Failure, bool>> call(String appointmentId, String message) async {
+    return await repository.notifyCustomer(appointmentId, message);
   }
 }
