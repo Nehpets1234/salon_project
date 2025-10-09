@@ -1,4 +1,6 @@
-class BookingEntity {
+import 'package:equatable/equatable.dart';
+
+class BookingEntity extends Equatable {
   final String id;
   final String userId;
   final String serviceId;
@@ -7,7 +9,7 @@ class BookingEntity {
   final int durationMinutes;
   final String status; // e.g., 'confirmed', 'cancelled', 'completed'
 
-  BookingEntity({
+  const BookingEntity({
     required this.id,
     required this.userId,
     required this.serviceId,
@@ -16,4 +18,15 @@ class BookingEntity {
     required this.durationMinutes,
     required this.status,
   });
+
+  @override
+  List<Object?> get props => [
+        id,
+        userId,
+        serviceId,
+        staffId,
+        dateTime,
+        durationMinutes,
+        status,
+      ];
 }

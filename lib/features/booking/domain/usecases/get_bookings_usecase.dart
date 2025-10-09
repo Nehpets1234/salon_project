@@ -1,3 +1,5 @@
+import 'package:dartz/dartz.dart';
+import '../../../../core/errors/failure.dart';
 import '../entities/booking_entity.dart';
 import '../repositories/booking_repository.dart';
 
@@ -6,7 +8,18 @@ class GetBookingsUseCase {
 
   GetBookingsUseCase(this.repository);
 
-  Future<List<BookingEntity>> call({String? userId, String? staffId}) {
-    return repository.getBookings(userId: userId, staffId: staffId);
+  Future<Either<Failure, List<BookingEntity>>> call({
+    String? userId,
+    String? staffId,
+  }) async {
+    try {
+      final bookings = await repository.getBookings(
+        userId: userId,
+        staffId: staffId,
+      );
+      return Right(bookings);
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
   }
 }

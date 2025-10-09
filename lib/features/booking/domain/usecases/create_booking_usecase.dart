@@ -1,3 +1,5 @@
+import 'package:dartz/dartz.dart';
+import '../../../../core/errors/failure.dart';
 import '../entities/booking_entity.dart';
 import '../repositories/booking_repository.dart';
 
@@ -6,7 +8,12 @@ class CreateBookingUseCase {
 
   CreateBookingUseCase(this.repository);
 
-  Future<void> call(BookingEntity booking) {
-    return repository.createBooking(booking);
+  Future<Either<Failure, void>> call(BookingEntity booking) async {
+    try {
+      await repository.createBooking(booking);
+      return const Right(null);
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
   }
 }
